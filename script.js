@@ -1,31 +1,40 @@
-// ======== GLOBAL VARIABLES ========
+// ======== 1. INITIALISE GAME ========
+
+// GLOBAL STATE
 const gameState = {
   flippedCards: [],
   lockGame: false,
   matchPair: 0,
 };
 
-// ======== INITIALISE GAME ========
-
+// Load Javascript after DOM tree built
 document.addEventListener("DOMContentLoaded", () => {
-  // start the game
+  // A. Find game container in HTML
   const gameContainer = document.querySelector(".game-container");
+
+  // B. Start the actual game
   startGame(gameContainer);
 
-  // hide win game alert
+  // C. Option to Play Again / Close Game
   const closeBtn = document.querySelector(".close-btn");
   closeBtn.addEventListener("click", hideAlert);
 
-  // hide play again button
   const playAgainBtn = document.querySelector(".play-again-btn");
   playAgainBtn.addEventListener("click", function () {
     hideAlert();
-    gameState.matchPair = 0;
     startGame(gameContainer);
   });
 });
 
+// ======== 2. GAME SETUP ========
+
 function startGame(container) {
+  // A. Reset game state
+  gameState.flippedCards = [];
+  gameState.lockGame = false;
+  gameState.matchPair = 0;
+
+  // B. Define 8 colors
   const colors = [
     "red",
     "orange",
@@ -36,48 +45,56 @@ function startGame(container) {
     "purple",
     "pink",
   ];
-  // ======== 1. create 8 pairs of colors ========
+
+  // C. Create pairs by duplicating
   const colorPairs = colors.concat(colors);
-  // ======== 2. shuffle colors ========
+
+  // D. Shuffle position of colors
   const shuffledColors = shuffle(colorPairs);
+
+  // E. Populate .game-container with cards
   createCards(container, shuffledColors);
 }
 
-// ======== FUNCTION: SHUFFLE COLORS ========
+// ======== FUNCTION: SHUFFLE ========
 
 function shuffle(array) {
   const newArray = [...array];
   return newArray.sort((a, b) => Math.random() - 0.5);
 }
 
-// ======== FUNCTION: CREATE CARDS WITH EVENT LISTENER ========
+// ======== FUNCTION: CREATECARDS() - build the game board ========
 
 function createCards(container, shuffledColors) {
-  // clear existing content
+  // Reset game board - clear any existing cards
   container.innerHTML = "";
 
   shuffledColors.forEach((color) => {
-    // create card element
+    // A. Create card element
     const card = document.createElement("div");
     card.className = "card";
     card.setAttribute("data-color", color);
 
-    // set default card background and content
+    // B. Set face-down appearance of card
     card.style.backgroundColor = "#cccccc";
     card.textContent = "?";
 
-    // ======== EVENT LISTENER ========
+    // C. Make card clickable - addEventListener
     card.addEventListener("click", () => {
       if (gameState.lockGame || card.classList.contains("flipped")) {
-        return;
+        return; // ignore if busy or already flipped
       }
+      // show card's color
       flipCard(card);
+      // add card into gameState flippedCards array
       gameState.flippedCards.push(card);
 
+      // gameState.flippedCards = [card1, card2], compare colors
       if (gameState.flippedCards.length === 2) {
         checkForMatch();
       }
     });
+    // D. Add to game board
     container.appendChild(card);
   });
 }
@@ -86,6 +103,7 @@ function createCards(container, shuffledColors) {
 function flipCard(card) {
   // get color of card
   const color = card.getAttribute("data-color");
+
   // apply color to card background
   card.style.backgroundColor = color;
   card.textContent = "";
@@ -103,28 +121,32 @@ function unflipCards(card1, card2) {
   card2.classList.remove("flipped");
 }
 
-// ======== FUNCTION: CHECK FOR MATCH ========
+// ======== FUNCTION: checkForMatch() ========
 function checkForMatch() {
-  gameState.lockGame = true;
+  gameState.lockGame = true; // stop clicks
 
   const [card1, card2] = gameState.flippedCards;
   const color1 = card1.getAttribute("data-color");
   const color2 = card2.getAttribute("data-color");
 
+  // if match found
   if (color1 === color2) {
+    // increase score by 1
     gameState.matchPair++;
+    // permenant match
     card1.classList.add("matched");
     card2.classList.add("matched");
 
     if (gameState.matchPair === 8) {
-      // schedule (delay) execution of alert function
-      console.log("win");
+      // schedule win alert
+      // wait 0.5s
       setTimeout(showAlert, 500);
     }
 
+    // clear flipped cards, unlock game
     resetTurn();
   } else {
-    // schedule (delay) execution of unflip function and reset turn
+    // no match - flip back 1s delay
     setTimeout(() => {
       unflipCards(card1, card2);
       resetTurn();
@@ -142,6 +164,7 @@ function resetTurn() {
 // show win display
 function showAlert() {
   const alert = document.getElementById("alert-win");
+  // make alert visible
   alert.classList.remove("hidden");
 }
 
@@ -150,4 +173,3 @@ function hideAlert() {
   const alert = document.getElementById("alert-win");
   alert.classList.add("hidden");
 }
-

@@ -1,11 +1,10 @@
-/* Reset default margins and padding */
+/* GLOBAL RESET */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Tiny5", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 /* .tiny5-regular {
@@ -14,65 +13,73 @@
   font-style: normal;
 } */
 
+/* PAGE LAYOUT */
+
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f0f0;
+  justify-content: center; /* Horizontal center */
+  align-items: center; /* Vertical center */
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f0f0f0; /* Light gray background */
 }
 
-/* Game board container */
+/* GAME BOARD LAYOUT - DESKTOP */
+
 .game-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  width: 90vh;
-  height: 90vh;
-  gap: 10px;
-  padding: 10px;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+  grid-template-rows: repeat(4, 1fr); /* 4 equal rows */
+  width: 90vh; /* Square based on viewport height */
+  height: 90vh; /* Maintains perfect square */
+  gap: 10px; /* Space between cards */
+  padding: 10px; /* Inner spacing */
+  justify-content: center; /* Center grid horizontally */
+  align-items: center; /* Center grid vertically */
 }
 
-/* Individual cards */
-.card {
-  width: calc(80vh / 4);
-  height: calc(80vh / 4);
-  background-color: #ccc; /* Default gray back */
-  border-radius: 8px;
-  
-  cursor: pointer;
+/* CARD STYLING - FACE DOWN STATE */
 
+.card {
+  width: calc(80vh / 4); /* Accounts for padding/gap */
+  height: calc(80vh / 4); /* Perfect squares */
+  background-color: #ccc; /* Face-down gray color */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Shows hand cursor on hover */
+
+  /* Center the question mark */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 35px;
-  color: white;
-  
-  transition: transform 0.5s;
+
+  font-size: 35px; /* Large, readable "?" */
+  color: white; /* White question mark */
+  transition: transform 0.5s; /* Smooth hover animation */
 }
 
-/* Hover effect */
 .card:hover {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Cards grow 10% on hover */
 }
 
 .alert {
-  position: fixed;
+  position: fixed; /* Stays in place during scroll */
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 50%; /* Start from center */
+  transform: translate(-50%, -50%); /* Perfect centering trick */
   height: 95vh;
-  width: 95vh;
+  width: 95vh; /* Almost full screen */
+
+  /* Flexbox for content alignment */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(76, 175, 80, 0.9);
+
+  background-color: rgba(76, 175, 80, 0.9); /* Semi-transparent green */
   color: white;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Depth effect */
+  z-index: 1000; /* Above everything else */
   min-width: 250px;
   text-align: center;
 }
@@ -82,14 +89,13 @@ body {
 }
 
 .close-btn {
-  position: absolute;
+  position: absolute; /* Position relative to alert */
   top: 10px;
-  right: 15px;
+  right: 15px; /* Top-right corner */
   color: white;
   font-weight: bold;
-
   margin: 10px;
-  font-size: 35px;
+  font-size: 35px; /* Large "×" */
   line-height: 20px;
   cursor: pointer;
   transition: 0.3s;
@@ -98,34 +104,49 @@ body {
 }
 
 .close-btn:hover {
-  color: #ffeb3b;
+  color: #ffeb3b; /* Yellow on hover */
 }
 
 .alert h3 {
   margin: 0 0 15px 0;
   font-weight: bold;
-  font-size: 75px;
+  font-size: 75px; /* Very large "You won!" text */
 }
 
 .play-again-btn {
-  background-color: #f0f0f0;
-  transform: scale(1.05);
-
   background-color: white;
-  color: #4caf50;
+  color: #4caf50; /* Green text */
   border: none;
-
   margin: 20px;
   padding: 8px 16px;
   border-radius: 4px;
-
   cursor: pointer;
-
   font-weight: bold;
-  font-size: 25px;
+  font-size: 25px; /* Large button text */
   z-index: 1000;
 }
 
 .play-again-btn:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.05); /* Slight grow effect */
+}
+
+/* GAME BOARD LAYOUT - MOBILE */
+
+@media (max-width: 768px) {
+  .game-container {
+    width: 50vh;
+    height: 50vh; /* Smaller game board */
+  }
+
+  /* Individual cards */
+  .card {
+    width: calc(50vh / 4); /* Smaller but proportional cards */
+    height: calc(50vh / 4);
+  }
+
+  .alert {
+    height: 60vh;
+    width: 60vh; /* Smaller victory modal */
+  }
 }
