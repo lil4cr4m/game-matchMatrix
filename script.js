@@ -7,9 +7,22 @@ const gameState = {
 
 // ======== INITIALISE GAME ========
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  // start the game
   const gameContainer = document.querySelector(".game-container");
   startGame(gameContainer);
+
+  // hide win game alert
+  const closeBtn = document.querySelector(".close-btn");
+  closeBtn.addEventListener("click", hideAlert);
+
+  // hide play again button
+  const playAgainBtn = document.querySelector(".play-again-btn");
+  playAgainBtn.addEventListener("click", function () {
+    hideAlert();
+    gameState.matchPair = 0;
+    startGame(gameContainer);
+  });
 });
 
 function startGame(container) {
@@ -23,7 +36,9 @@ function startGame(container) {
     "purple",
     "pink",
   ];
+  // ======== 1. create 8 pairs of colors ========
   const colorPairs = colors.concat(colors);
+  // ======== 2. shuffle colors ========
   const shuffledColors = shuffle(colorPairs);
   createCards(container, shuffledColors);
 }
@@ -32,7 +47,7 @@ function startGame(container) {
 
 function shuffle(array) {
   const newArray = [...array];
-  return newArray.sort((a, b) => Math.random - 0.5);
+  return newArray.sort((a, b) => Math.random() - 0.5);
 }
 
 // ======== FUNCTION: CREATE CARDS WITH EVENT LISTENER ========
@@ -102,13 +117,14 @@ function checkForMatch() {
     card2.classList.add("matched");
 
     if (gameState.matchPair === 8) {
-      setTimeout(() => {
-        alert("You won!");
-      }, 500);
+      // schedule (delay) execution of alert function
+      console.log("win");
+      setTimeout(showAlert, 500);
     }
 
     resetTurn();
   } else {
+    // schedule (delay) execution of unflip function and reset turn
     setTimeout(() => {
       unflipCards(card1, card2);
       resetTurn();
@@ -121,3 +137,17 @@ function resetTurn() {
   gameState.flippedCards = [];
   gameState.lockGame = false;
 }
+
+// ======== FUNCTION: ALERT ========
+// show win display
+function showAlert() {
+  const alert = document.getElementById("alert-win");
+  alert.classList.remove("hidden");
+}
+
+// hide win display
+function hideAlert() {
+  const alert = document.getElementById("alert-win");
+  alert.classList.add("hidden");
+}
+

@@ -3,9 +3,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-/* Center the game on page */
+/* .tiny5-regular {
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+} */
+
 body {
   display: flex;
   justify-content: center;
@@ -31,16 +39,93 @@ body {
   height: calc(80vh / 4);
   background-color: #ccc; /* Default gray back */
   border-radius: 8px;
+  
   cursor: pointer;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 35px;
   color: white;
+  
   transition: transform 0.5s;
 }
 
 /* Hover effect */
 .card:hover {
   transform: scale(1.1);
+}
+
+.alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 95vh;
+  width: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(76, 175, 80, 0.9);
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  min-width: 250px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-weight: bold;
+
+  margin: 10px;
+  font-size: 35px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: none;
+  border: none;
+}
+
+.close-btn:hover {
+  color: #ffeb3b;
+}
+
+.alert h3 {
+  margin: 0 0 15px 0;
+  font-weight: bold;
+  font-size: 75px;
+}
+
+.play-again-btn {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+
+  background-color: white;
+  color: #4caf50;
+  border: none;
+
+  margin: 20px;
+  padding: 8px 16px;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 25px;
+  z-index: 1000;
+}
+
+.play-again-btn:hover {
+  background-color: #f0f0f0;
 }
