@@ -55,14 +55,14 @@ body {
 }
 
 .card:hover {
-  transform: scale(1.1); /* Cards grow 10% on hover */
+  transform: scale(1.1, 1.1); /* Cards grow 10% on hover */
 }
 
 .alert {
   position: fixed; /* Stays in place during scroll */
   top: 50%;
   left: 50%; /* Start from center */
-  transform: translate(-50%, -50%); /* Perfect centering trick */
+  transform: translate(-50%, -50%); /* shift element along the X and Y axes */
   height: 90vh;
   width: 90vh; /* Almost full screen */
   max-height: 600px;
