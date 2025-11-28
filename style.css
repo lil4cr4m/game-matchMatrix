@@ -33,27 +33,25 @@ body {
   height: 90vh; /* Maintains perfect square */
   gap: 10px; /* Space between cards */
   padding: 10px; /* Inner spacing */
-  justify-content: center; /* Center grid horizontally */
-  align-items: center; /* Center grid vertically */
+  place-items: center;
 }
 
 /* CARD STYLING - FACE DOWN STATE */
 
 .card {
-  width: calc(80vh / 4); /* Accounts for padding/gap */
-  height: calc(80vh / 4); /* Perfect squares */
-  background-color: #ccc; /* Face-down gray color */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Shows hand cursor on hover */
-
-  /* Center the question mark */
+  width: calc(
+    (90vh - 80px) / 4
+  ); /* 90vh - (2*10px padding + 3*10px gaps) = 80px */
+  height: calc((90vh - 80px) / 4);
+  background-color: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-size: 35px; /* Large, readable "?" */
-  color: white; /* White question mark */
-  transition: transform 0.5s; /* Smooth hover animation */
+  font-size: 35px;
+  color: white;
+  transition: transform 0.5s;
 }
 
 .card:hover {
@@ -65,9 +63,10 @@ body {
   top: 50%;
   left: 50%; /* Start from center */
   transform: translate(-50%, -50%); /* Perfect centering trick */
-  height: 95vh;
-  width: 95vh; /* Almost full screen */
-
+  height: 90vh;
+  width: 90vh; /* Almost full screen */
+  max-height: 600px;
+  max-width: 600px;
   /* Flexbox for content alignment */
   display: flex;
   flex-direction: column;
@@ -136,17 +135,18 @@ body {
 @media (max-width: 768px) {
   .game-container {
     width: 50vh;
-    height: 50vh; /* Smaller game board */
+    height: 50vh;
+    place-items: center;
   }
 
   /* Individual cards */
   .card {
-    width: calc(50vh / 4); /* Smaller but proportional cards */
-    height: calc(50vh / 4);
+    width: calc((50vh - 80px) / 4);
+    height: calc((50vh - 80px) / 4);
   }
 
   .alert {
     height: 60vh;
-    width: 60vh; /* Smaller victory modal */
+    width: 60vh;
   }
 }
