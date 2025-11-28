@@ -4,30 +4,18 @@ A classic memory game written in HTML, CSS and Javascript
 
 ---
 
+![start game screen](game-matchMatrix-img/game-matchMatrix-01.png)
+_Start Game Screen_
+![end game screen](game-matchMatrix-img/game-matchMatrix-02.png)
+_End Game Screen_
+
+---
+
 ## How to Play
 
 #### Objective
 
 Find all matching pairs
-
-#### Gameplay
-
-- Click on cards to flip them over
-- Remember the colors and their position
-- Match 2 cards with the same color
-- Complete all pairs to win the game!
-
-#### Features
-
-- **8 Color Pairs**: Red, orange, yellow, green, teal, blue, purple
-- **Random Shuffle**: Cards are randomised every new game
-- **Win Condition**: All pairs are found
-
-#### Technologies Used
-
-- **HTML 5**: Game structure, layout
-- **CSS**: Styling, animation
-- **Javascript**: Game logic, card interactions and win condition
 
 #### Game Rules
 
@@ -36,6 +24,12 @@ Find all matching pairs
 - If cards match, they stay face up
 - If cards don't match, they flip back
 - Game ends when all 8 pairs are found
+
+#### Features
+
+- **8 Color Pairs**: Red, orange, yellow, green, teal, blue, purple
+- **Random Shuffle**: Cards are randomised every new game
+- **Win Condition**: All pairs are found
 
 ---
 
@@ -48,6 +42,14 @@ memory-game/
 ├── script.js           # Game logic and functionality
 └── README.md           # This file
 ```
+
+---
+
+#### Technologies Used
+
+- **HTML 5**: Game structure, layout
+- **CSS**: Styling, animation
+- **Javascript**: Game logic, card interactions and win condition
 
 ---
 
